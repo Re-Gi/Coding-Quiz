@@ -1,0 +1,32 @@
+* body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+section div {
+    display: inline-block;
+    width: 80%;
+    text-align: left;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: rgb(33, 116, 155);
+    font-weight: bold;
+}
+
+a:hover, a:active {
+    color: transparent;
+}
+
+#timer {
+    position: fixed;
+    right: 20px;
+    font-size: 20px;
+}
+
+#highscores {
+    position: fixed;
+    left: 20px;
+}
