@@ -1,5 +1,7 @@
-var divEl = document.querySelector("#box1");
 var sectionEl = document.querySelector("section");
+var divEl = document.querySelector(".box1");
+var btnGroupEl = document.querySelector(".btn-group");
+var titleEl = document.querySelector("h2");
 
 //Question objects
 var flowerQ = {
@@ -28,7 +30,7 @@ var daysQ = {
 
 var birthstoneQ = {
     question: "Which is considered a December birthstone?",
-    choices: ["Turquoise", "Saphire", "Diamond", "Aquamarine"],
+    choices: ["Turquoise", "Sapphire", "Diamond", "Aquamarine"],
     answer: "turquoise"
 }
 
@@ -38,12 +40,17 @@ var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
 console.log(questions);
 
 for (var i = 0; i < 5; i++) {
-    var randomInt = Math.floor(Math.random() * questions.length);
-    
-    var title = document.createElement("h2");
-    title.textContent = questions[randomInt].question;
-    divEl.appendChild(title);
-    
-    questions.splice(randomInt, 1);
-    console.log(questions);
+    var randomIntQ = Math.floor(Math.random() * questions.length);
+    titleEl.textContent = questions[randomIntQ].question;
+
+    for (var i = 0; i < 4; i++) {
+        var randomIntC = Math.floor(Math.random() * questions[randomIntQ].choices.length);
+        var btnItemEl = document.createElement("button");
+        btnItemEl.textContent = questions[randomIntQ].choices[randomIntC];
+        btnGroupEl.appendChild(btnItemEl);
+
+        questions[randomIntQ].choices.splice(randomIntC, 1);
+    }
+
+    questions.splice(randomIntQ, 1);
 }

@@ -10,10 +10,6 @@ section {
     text-align: left;
 }
 
-section div {
-    position: absolute;
-}
-
 a:link, a:visited {
     text-decoration: none;
     color: rgb(33, 116, 155);
@@ -22,6 +18,28 @@ a:link, a:visited {
 
 a:hover, a:active {
     color: transparent;
+}
+
+.box1 {
+    position: absolute;
+}
+
+.btn-group button {
+    display: block;
+    background-color: rgb(33, 116, 155); 
+    border: 1px solid rgb(78, 154, 189);
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: left;
+    padding: 4px 10px;
+    margin: 3px 0;
+    cursor: pointer; 
+}
+
+.btn-group button:hover {
+    background-color: rgb(78, 154, 189);
 }
 
 #timer {
