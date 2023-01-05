@@ -4,10 +4,14 @@
     padding: 20px;
 }
 
-section div {
+section {
     display: inline-block;
     width: 80%;
     text-align: left;
+}
+
+section div {
+    position: absolute;
 }
 
 a:link, a:visited {
