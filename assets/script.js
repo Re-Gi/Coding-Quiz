@@ -1,3 +1,6 @@
+var divEl = document.querySelector("#box1");
+var sectionEl = document.querySelector("section");
+
 //Question objects
 var flowerQ = {
     question: "Which is considered a December flower?",
@@ -12,7 +15,7 @@ var zodiacQ = {
 }
 
 var romanQ = {
-    question: "December is the ____ month in the calendar of Romulus",
+    question: "December is the ____ month in the calendar of Romulus.",
     choices: ["10th", "12th", "7th", "1st"],
     answer: "10th"
 }
@@ -31,5 +34,16 @@ var birthstoneQ = {
 
 //array of question objects
 var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
-console.log(daysQ);
+
 console.log(questions);
+
+for (var i = 0; i < 5; i++) {
+    var randomInt = Math.floor(Math.random() * questions.length);
+    
+    var title = document.createElement("h2");
+    title.textContent = questions[randomInt].question;
+    divEl.appendChild(title);
+    
+    questions.splice(randomInt, 1);
+    console.log(questions);
+}
