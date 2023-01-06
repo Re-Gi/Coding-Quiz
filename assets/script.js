@@ -1,7 +1,9 @@
-var sectionEl = document.querySelector("section");
+var startBtnEl = document.querySelector("#start-btn");
+var timeEl = document.querySelector("#timer");
 var divEl = document.querySelector(".box1");
-var btnGroupEl = document.querySelector(".btn-group");
 var titleEl = document.querySelector("h2");
+var btnGroupEl = document.querySelector(".btn-group");
+
 
 //Question objects
 var flowerQ = {
@@ -37,20 +39,64 @@ var birthstoneQ = {
 //array of question objects
 var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
 
-console.log(questions);
+startBtnEl.addEventListener("click", function() {
+    buildQuestions();
+    startTimer();
+})
 
-for (var i = 0; i < 5; i++) {
-    var randomIntQ = Math.floor(Math.random() * questions.length);
-    titleEl.textContent = questions[randomIntQ].question;
+function buildQuestions() {
+    for (var i = 0; i < 5; i++) {
+        if (questions.length === 0) {
+            titleEl.textContent = "Your Score:";
+            var btnItemEl = document.createElement("button");
+            btnItemEl.textContent = "Next";
+            btnGroupEl.appendChild(btnItemEl);
+        }
 
-    for (var i = 0; i < 4; i++) {
-        var randomIntC = Math.floor(Math.random() * questions[randomIntQ].choices.length);
-        var btnItemEl = document.createElement("button");
-        btnItemEl.textContent = questions[randomIntQ].choices[randomIntC];
-        btnGroupEl.appendChild(btnItemEl);
+        //attaches questions to h2 element
+        var randomIntQ = Math.floor(Math.random() * questions.length); 
+        titleEl.textContent = questions[randomIntQ].question;
 
-        questions[randomIntQ].choices.splice(randomIntC, 1);
+        //makes buttons with answer choices
+        for (var j = 0; j < 4; j++) {
+            var randomIntC = Math.floor(Math.random() * questions[randomIntQ].choices.length);
+            var btnItemEl = document.createElement("button");
+            btnItemEl.textContent = questions[randomIntQ].choices[randomIntC];
+            btnGroupEl.appendChild(btnItemEl);
+
+            questions[randomIntQ].choices.splice(randomIntC, 1);
+        }
+        questions.splice(randomIntQ, 1);
+
+        console.log(titleEl);
+        console.log(btnGroupEl);
+
+        break;
     }
+}
 
-    questions.splice(randomIntQ, 1);
+btnGroupEl.addEventListener("click", btnClicked);
+
+function btnClicked(event){
+    var userAnswer = event.target.textContent;
+    console.log(userAnswer);
+    titleEl.textContent = "";
+    btnGroupEl.innerHTML = "";
+    buildQuestions();
+} 
+
+console.log(questions);
+var secondsLeft = 60;
+timeEl.textContent = secondsLeft;
+
+function startTimer() {
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft;
+
+        if(secondsLeft === 0) {
+            // window.location.assign("./index2.html");
+            clearInterval(timerInterval);
+        }
+      }, 1000);
 }
