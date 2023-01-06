@@ -10,7 +10,7 @@ main {
 
 section {
     display: inline-block;
-    width: 80%;
+    width: 40%;
     text-align: left;
 }
 
@@ -18,14 +18,33 @@ section {
     position: absolute;
 } */
 
-a:link, a:visited {
+header a:link, header a:visited {
     text-decoration: none;
     color: rgb(33, 116, 155);
     font-weight: bold;
 }
 
-a:hover, a:active {
+header a:hover, header a:active {
     color: transparent;
+}
+
+.big-btn {
+    background-color: rgb(33, 116, 155); 
+    border: 1px solid rgb(78, 154, 189);
+    color: white;
+    font-size: 22px;
+    font-weight: bolder;
+    padding: 4px 10px;
+    margin: 3px 0;
+    cursor: pointer; 
+}
+
+.big-btn:hover {
+    background-color: rgb(78, 154, 189);
+}
+
+.btn-group {
+    width: fit-content;
 }
 
 .btn-group button {
@@ -37,6 +56,7 @@ a:hover, a:active {
     font-size: 15px;
     font-weight: bolder;
     text-align: left;
+    width: 150px;
     padding: 4px 10px;
     margin: 3px 0;
     cursor: pointer; 
@@ -57,17 +77,3 @@ a:hover, a:active {
     left: 20px;
 }
 
-#start-btn {
-    background-color: rgb(33, 116, 155); 
-    border: 1px solid rgb(78, 154, 189);
-    color: white;
-    font-size: 22px;
-    font-weight: bolder;
-    padding: 4px 10px;
-    margin: 3px 0;
-    cursor: pointer; 
-}
-
-#start-btn:hover {
-    background-color: rgb(78, 154, 189);
-}

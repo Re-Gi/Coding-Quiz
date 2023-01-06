@@ -1,4 +1,6 @@
-var startBtnEl = document.querySelector("#start-btn");
+var mainEl = document.querySelector("main");
+var mainTitleEl = document.querySelector("h1");
+var startBtnEl = document.querySelector(".big-btn");
 var timeEl = document.querySelector("#timer");
 var divEl = document.querySelector(".box1");
 var titleEl = document.querySelector("h2");
@@ -26,7 +28,7 @@ var romanQ = {
 
 var daysQ = {
     question: "How many days are in December?",
-    choices: ["31", "30", "29", "It changes each year"],
+    choices: ["31", "30", "29", "32"],
     answer: "31"
 }
 
@@ -38,8 +40,10 @@ var birthstoneQ = {
 
 //array of question objects
 var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
+var score = 0;
 
 startBtnEl.addEventListener("click", function() {
+    mainEl.innerHTML = "";
     buildQuestions();
     startTimer();
 })
@@ -47,10 +51,8 @@ startBtnEl.addEventListener("click", function() {
 function buildQuestions() {
     for (var i = 0; i < 5; i++) {
         if (questions.length === 0) {
-            titleEl.textContent = "Your Score:";
-            var btnItemEl = document.createElement("button");
-            btnItemEl.textContent = "Next";
-            btnGroupEl.appendChild(btnItemEl);
+            scorePage();
+            break;
         }
 
         //attaches questions to h2 element
@@ -68,9 +70,6 @@ function buildQuestions() {
         }
         questions.splice(randomIntQ, 1);
 
-        console.log(titleEl);
-        console.log(btnGroupEl);
-
         break;
     }
 }
@@ -79,14 +78,16 @@ btnGroupEl.addEventListener("click", btnClicked);
 
 function btnClicked(event){
     var userAnswer = event.target.textContent;
+    // if (userAnswer == )
     console.log(userAnswer);
+
     titleEl.textContent = "";
     btnGroupEl.innerHTML = "";
+
     buildQuestions();
 } 
 
-console.log(questions);
-var secondsLeft = 60;
+var secondsLeft = 75;
 timeEl.textContent = secondsLeft;
 
 function startTimer() {
@@ -95,8 +96,26 @@ function startTimer() {
         timeEl.textContent = secondsLeft;
 
         if(secondsLeft === 0) {
-            // window.location.assign("./index2.html");
+            divEl.innerHTML = "";
+            scorePage();
             clearInterval(timerInterval);
+        // } else if (){
+        //     clearInterval(timerInterval);
         }
-      }, 1000);
+    }, 1000);
 }
+
+function scorePage() {
+    mainTitleEl.textContent = "Your Score:";
+    mainEl.appendChild(mainTitleEl);
+
+    var nextBtnEl = document.createElement("button");
+    nextBtnEl.setAttribute("class", "big-btn");
+    nextBtnEl.textContent = "Next";
+    mainEl.appendChild(nextBtnEl);
+
+    nextBtnEl.addEventListener("click", function() {
+        window.location.assign("./index2.html");
+    })
+}
+
