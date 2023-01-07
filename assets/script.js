@@ -11,13 +11,13 @@ var btnGroupEl = document.querySelector(".btn-group");
 var flowerQ = {
     question: "Which is considered a December flower?",
     choices: ["Narcissus", "Poppy", "Violet", "Larkspur"],
-    answer: "narcissus"
+    answer: "Narcissus"
 }
 
 var zodiacQ = {
     question: "Which is a December zodiac sign?",
     choices: ["Capricorn", "Leo", "Cancer", "Gemini"],
-    answer: "capricorn"
+    answer: "Capricorn"
 }
 
 var romanQ = {
@@ -35,11 +35,13 @@ var daysQ = {
 var birthstoneQ = {
     question: "Which is considered a December birthstone?",
     choices: ["Turquoise", "Sapphire", "Diamond", "Aquamarine"],
-    answer: "turquoise"
+    answer: "Turquoise"
 }
 
 //array of question objects
 var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
+var answers = [];
+var clickCount = 0;
 var score = 0;
 
 startBtnEl.addEventListener("click", function() {
@@ -49,15 +51,15 @@ startBtnEl.addEventListener("click", function() {
 })
 
 function buildQuestions() {
-    for (var i = 0; i < 5; i++) {
         if (questions.length === 0) {
             scorePage();
-            break;
+            return;
         }
 
         //attaches questions to h2 element
         var randomIntQ = Math.floor(Math.random() * questions.length); 
         titleEl.textContent = questions[randomIntQ].question;
+        answers.unshift(questions[randomIntQ].answer);
 
         //makes buttons with answer choices
         for (var j = 0; j < 4; j++) {
@@ -66,20 +68,22 @@ function buildQuestions() {
             btnItemEl.textContent = questions[randomIntQ].choices[randomIntC];
             btnGroupEl.appendChild(btnItemEl);
 
+
             questions[randomIntQ].choices.splice(randomIntC, 1);
         }
-        questions.splice(randomIntQ, 1);
 
-        break;
-    }
+    questions.splice(randomIntQ, 1);
+    console.log(answers);
 }
 
 btnGroupEl.addEventListener("click", btnClicked);
 
 function btnClicked(event){
-    var userAnswer = event.target.textContent;
-    // if (userAnswer == )
-    console.log(userAnswer);
+    clickCount++;
+
+    if (event.target.textContent !== answers[0]) {
+        secondsLeft-= 15;
+    }
 
     titleEl.textContent = "";
     btnGroupEl.innerHTML = "";
@@ -92,21 +96,26 @@ timeEl.textContent = secondsLeft;
 
 function startTimer() {
     var timerInterval = setInterval(function() {
-        secondsLeft--;
-        timeEl.textContent = secondsLeft;
-
-        if(secondsLeft === 0) {
+        if (clickCount === 5){
+            clearInterval(timerInterval);
+            return;
+        } else if(secondsLeft === 0) {
             divEl.innerHTML = "";
             scorePage();
             clearInterval(timerInterval);
-        // } else if (){
-        //     clearInterval(timerInterval);
+            return;
         }
+
+        secondsLeft--;
+        timeEl.textContent = secondsLeft;
     }, 1000);
 }
 
 function scorePage() {
-    mainTitleEl.textContent = "Your Score:";
+    score += secondsLeft;
+    timeEl.textContent = "";
+
+    mainTitleEl.textContent = "Your Score: " + score;
     mainEl.appendChild(mainTitleEl);
 
     var nextBtnEl = document.createElement("button");
