@@ -5,6 +5,7 @@ var timeEl = document.querySelector("#timer");
 var divEl = document.querySelector(".box1");
 var titleEl = document.querySelector("h2");
 var btnGroupEl = document.querySelector(".btn-group");
+var highscoresEl = document.querySelector("#highscores-list");
 
 
 //Question objects
@@ -71,7 +72,6 @@ function buildQuestions() {
 
             questions[randomIntQ].choices.splice(randomIntC, 1);
         }
-
     questions.splice(randomIntQ, 1);
     console.log(answers);
 }
@@ -118,13 +118,42 @@ function scorePage() {
     mainTitleEl.textContent = "Your Score: " + score;
     mainEl.appendChild(mainTitleEl);
 
-    var nextBtnEl = document.createElement("button");
-    nextBtnEl.setAttribute("class", "big-btn");
-    nextBtnEl.textContent = "Next";
-    mainEl.appendChild(nextBtnEl);
+    var formEl = document.createElement("form");
+    // formEl.setAttribute("action", "./assets/highscores.html");
+    mainEl.appendChild(formEl);
 
-    nextBtnEl.addEventListener("click", function() {
-        window.location.assign("./index2.html");
+    var labelEl = document.createElement("label");
+    labelEl.setAttribute("for", "initials");
+    labelEl.textContent = "Enter initials:";
+    formEl.appendChild(labelEl);
+
+    var inputEl = document.createElement("input");
+    inputEl.setAttribute("type", "text");
+    inputEl.setAttribute("id", "initials");
+    formEl.appendChild(inputEl);
+
+    var submitBtnEl = document.createElement("button");
+    submitBtnEl.setAttribute("class", "big-btn");
+    submitBtnEl.textContent = "submit";
+    mainEl.appendChild(submitBtnEl);
+    
+
+    submitBtnEl.addEventListener("click", function() {
+        if (inputEl.value === "") {
+            alert("Please input your initials!");
+            return;
+        }
+        var newScore = {
+            userInitials: inputEl.value,
+            userScore: score
+        };
+
+        var latestScore = JSON.parse(localStorage.getItem("newScore"));
+        console.log(latestScore);
+        if (latestScore === null || latestScore.userScore < newScore.userScore) {
+            localStorage.setItem("newScore", JSON.stringify(newScore));
+          }
+
+        window.location.assign("./assets/highscores.html");
     })
 }
-
