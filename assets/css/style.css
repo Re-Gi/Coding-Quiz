@@ -14,7 +14,7 @@ main {
 
 section {
     display: inline-block;
-    width: 40%;
+    width: 45%;
     text-align: left;
     padding: 20px;
 }
@@ -62,7 +62,7 @@ button:hover {
 
 .big-btn {
     font-size: 22px;
-    margin: 3px 0;
+    margin: 3px 17px;
 }
 
 .lil-btn {

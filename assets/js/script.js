@@ -131,7 +131,7 @@ function indexInit() {
 
     function scorePage() {
         newScore.userScore += secondsLeft;
-        timeEl.textContent = "";
+        timeEl.textContent = secondsLeft;
 
         formEl.setAttribute("style", "display: block;");
 
@@ -224,7 +224,7 @@ function highscoresInit() {
     })
 }
 
-if (window.location.href === "file:///C:/Users/user/bootcamp/challenges/4Challenge/assets/highscores.html") {
+if (window.location.href === "https://re-gi.github.io/December-Quiz/assets/highscores.html") {
     highscoresInit();
 } else {
     indexInit();
