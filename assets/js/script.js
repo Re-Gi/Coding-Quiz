@@ -1,12 +1,16 @@
 var mainEl = document.querySelector("main");
 var mainTitleEl = document.querySelector("h1");
-var startBtnEl = document.querySelector(".big-btn");
+var startBtnEl = document.querySelector("#start-btn");
 var timeEl = document.querySelector("#timer");
 var divEl = document.querySelector(".box1");
 var titleEl = document.querySelector("h2");
 var btnGroupEl = document.querySelector(".btn-group");
 var highscoresEl = document.querySelector("#highscores-list");
-
+var formEl = document.querySelector("form");
+var formTitleEl = document.querySelector("#form-title");
+var labelEl = document.querySelector("label");
+var inputEl = document.querySelector("#initials");
+var submitBtnEl = document.querySelector("#submit-btn");
 
 //Question objects
 var flowerQ = {
@@ -43,117 +47,185 @@ var birthstoneQ = {
 var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
 var answers = [];
 var clickCount = 0;
-var score = 0;
 
-startBtnEl.addEventListener("click", function() {
-    mainEl.innerHTML = "";
-    buildQuestions();
-    startTimer();
-})
+var highscores = {
+    initials: [],
+    scores: []
+};
 
-function buildQuestions() {
-        if (questions.length === 0) {
-            scorePage();
-            return;
-        }
+var latestScores = JSON.parse(localStorage.getItem("highscores"));
+console.log(latestScores);
 
-        //attaches questions to h2 element
-        var randomIntQ = Math.floor(Math.random() * questions.length); 
-        titleEl.textContent = questions[randomIntQ].question;
-        answers.unshift(questions[randomIntQ].answer);
+// runs when the window is on index.html
+function indexInit() {
 
-        //makes buttons with answer choices
-        for (var j = 0; j < 4; j++) {
-            var randomIntC = Math.floor(Math.random() * questions[randomIntQ].choices.length);
-            var btnItemEl = document.createElement("button");
-            btnItemEl.textContent = questions[randomIntQ].choices[randomIntC];
-            btnGroupEl.appendChild(btnItemEl);
+    var newScore = {
+        userInitials: inputEl.value,
+        userScore: 0
+    };
+
+    startBtnEl.addEventListener("click", function() {
+        mainEl.innerHTML = "";
+        buildQuestions();
+        startTimer();
+    })
+
+    function buildQuestions() {
+            if (questions.length === 0) {
+                scorePage();
+                return;
+            }
+
+            //attaches questions to h2 element
+            var randomIntQ = Math.floor(Math.random() * questions.length); 
+            titleEl.textContent = questions[randomIntQ].question;
+            answers.unshift(questions[randomIntQ].answer);
+
+            //makes buttons with answer choices
+            for (var j = 0; j < 4; j++) {
+                var randomIntC = Math.floor(Math.random() * questions[randomIntQ].choices.length);
+                var btnItemEl = document.createElement("button");
+                btnItemEl.textContent = questions[randomIntQ].choices[randomIntC];
+                btnGroupEl.appendChild(btnItemEl);
 
 
-            questions[randomIntQ].choices.splice(randomIntC, 1);
-        }
-    questions.splice(randomIntQ, 1);
-    console.log(answers);
-}
-
-btnGroupEl.addEventListener("click", btnClicked);
-
-function btnClicked(event){
-    clickCount++;
-
-    if (event.target.textContent !== answers[0]) {
-        secondsLeft-= 15;
+                questions[randomIntQ].choices.splice(randomIntC, 1);
+            }
+        questions.splice(randomIntQ, 1);
     }
 
-    titleEl.textContent = "";
-    btnGroupEl.innerHTML = "";
+    btnGroupEl.addEventListener("click", btnClicked);
 
-    buildQuestions();
-} 
+    function btnClicked(event){
+        clickCount++;
 
-var secondsLeft = 75;
-timeEl.textContent = secondsLeft;
-
-function startTimer() {
-    var timerInterval = setInterval(function() {
-        if (clickCount === 5){
-            clearInterval(timerInterval);
-            return;
-        } else if(secondsLeft === 0) {
-            divEl.innerHTML = "";
-            scorePage();
-            clearInterval(timerInterval);
-            return;
+        if (event.target.textContent !== answers[0]) {
+            secondsLeft-= 15;
         }
 
-        secondsLeft--;
-        timeEl.textContent = secondsLeft;
-    }, 1000);
+        titleEl.textContent = "";
+        btnGroupEl.innerHTML = "";
+
+        buildQuestions();
+    } 
+
+    var secondsLeft = 75;
+    timeEl.textContent = secondsLeft;
+
+    function startTimer() {
+        var timerInterval = setInterval(function() {
+            if (clickCount === 5){
+                clearInterval(timerInterval);
+                return;
+            } else if(secondsLeft === 0) {
+                divEl.innerHTML = "";
+                scorePage();
+                clearInterval(timerInterval);
+                return;
+            }
+
+            secondsLeft--;
+            timeEl.textContent = secondsLeft;
+        }, 1000);
+    }
+
+    function scorePage() {
+        newScore.userScore += secondsLeft;
+        timeEl.textContent = "";
+
+        formEl.setAttribute("style", "display: block;");
+
+        formTitleEl.textContent = "Your Score: " + newScore.userScore;
+        labelEl.textContent = "Enter initials:";
+        submitBtnEl.textContent = "submit";
+        
+
+        submitBtnEl.addEventListener("click", function(event) {
+            event.preventDefault();
+            
+            if (inputEl.value === "") {
+                alert("Please input your initials!");
+                return;
+            } else {
+                newScore.userInitials = inputEl.value;
+            }
+        
+            console.log(newScore);
+            console.log(latestScores);
+         
+            if(latestScores === null) {
+                highscores.scores.push(newScore.userScore);
+                highscores.initials.push(newScore.userInitials);
+
+                localStorage.setItem("highscores", JSON.stringify(highscores));
+            } else if(latestScores.scores.length < 10) {
+                for (var i = 0; i <= 10; i++) {
+                    if(newScore.userInitials === latestScores.initials[i] && newScore.userScore === latestScores.scores[i]) {
+                        break;
+                    } else if(newScore.userScore > latestScores.scores[i]) {
+                        latestScores.scores.splice(i, 0, newScore.userScore);
+                        latestScores.initials.splice(i, 0, newScore.userInitials);
+
+                        localStorage.setItem("highscores", JSON.stringify(latestScores));
+                        break;
+                    } else if(i === 10) {
+                        latestScores.scores.push(newScore.userScore);
+                        latestScores.initials.push(newScore.userInitials);
+
+                        localStorage.setItem("highscores", JSON.stringify(latestScores));
+                    }
+                }    
+             } else {
+                for (var j = 0; j <= 10; j++) {
+                    if(newScore.userInitials === latestScores.initials[j] && newScore.userScore === latestScores.scores[j]) {
+                        break;
+                    } else if(newScore.userScore > latestScores.scores[j]){
+    
+                        latestScores.scores.splice(j, 0, newScore.userScore);
+                        latestScores.initials.splice(j, 0, newScore.userInitials);
+    
+                        latestScores.scores.pop();
+                        latestScores.initials.pop();
+    
+                        localStorage.setItem("highscores", JSON.stringify(latestScores));
+                        console.log(latestScores);
+                        break;
+                    }
+                }
+            }
+            window.location.assign("./assets/highscores.html");
+        })
+    }
 }
 
-function scorePage() {
-    score += secondsLeft;
-    timeEl.textContent = "";
+var listEl = document.querySelector("#highscores-list");
+var clearEl = document.querySelector("#clear-btn");
 
-    mainTitleEl.textContent = "Your Score: " + score;
-    mainEl.appendChild(mainTitleEl);
+// runs when window is on highscores.html
+function highscoresInit() {
 
-    var formEl = document.createElement("form");
-    // formEl.setAttribute("action", "./assets/highscores.html");
-    mainEl.appendChild(formEl);
-
-    var labelEl = document.createElement("label");
-    labelEl.setAttribute("for", "initials");
-    labelEl.textContent = "Enter initials:";
-    formEl.appendChild(labelEl);
-
-    var inputEl = document.createElement("input");
-    inputEl.setAttribute("type", "text");
-    inputEl.setAttribute("id", "initials");
-    formEl.appendChild(inputEl);
-
-    var submitBtnEl = document.createElement("button");
-    submitBtnEl.setAttribute("class", "big-btn");
-    submitBtnEl.textContent = "submit";
-    mainEl.appendChild(submitBtnEl);
-    
-
-    submitBtnEl.addEventListener("click", function() {
-        if (inputEl.value === "") {
-            alert("Please input your initials!");
-            return;
+    if (latestScores !== null) {
+        for (var i = 0; i < 10; i++) {
+            if(latestScores.scores[i] !== undefined){
+            var listItemEl = document.createElement("li");
+            listEl.appendChild(listItemEl);
+            listItemEl.textContent = latestScores.initials[i] + " / " + latestScores.scores[i] + "pts";
+            } else {
+                break;
+            }
         }
-        var newScore = {
-            userInitials: inputEl.value,
-            userScore: score
-        };
+    } else {
 
-        var latestScore = JSON.parse(localStorage.getItem("newScore"));
-        console.log(latestScore);
-        if (latestScore === null || latestScore.userScore < newScore.userScore) {
-            localStorage.setItem("newScore", JSON.stringify(newScore));
-          }
+    }
 
-        window.location.assign("./assets/highscores.html");
+    clearEl.addEventListener("click", function(){
+        localStorage.clear();
+        location.reload();
     })
+}
+
+if (window.location.href === "file:///C:/Users/user/bootcamp/challenges/4Challenge/assets/highscores.html") {
+    highscoresInit();
+} else {
+    indexInit();
 }

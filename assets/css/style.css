@@ -1,10 +1,14 @@
 * body {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
     text-align: center;
     padding: 20px;
 }
 
 main {
+    position: absolute;
+    left: 25%;
+    width: 50%;
     text-align: center;
 }
 
@@ -12,6 +16,7 @@ section {
     display: inline-block;
     width: 40%;
     text-align: left;
+    padding: 20px;
 }
 
 header a:link, header a:visited {
@@ -24,36 +29,46 @@ header a:hover, header a:active {
     color: transparent;
 }
 
-ul {
+ol {
     display: inline-block;
-    color: white;
+    color: rgb(78, 154, 189);
     font-size: 24px;
-    width: fit-content;
+    width: max-content;
     padding: 5px;
 }
 
 li {
-    background-color: rgb(78, 154, 189);
+    border: 2px solid rgb(33, 116, 155);
     padding: 8px 40px;
+    margin: 5px;
+}
+
+form {
+    display: none;
 }
 
 button {
-    display: inline-block;
-}
-
-.big-btn {
     background-color: rgb(33, 116, 155); 
     border: 1px solid rgb(78, 154, 189);
     color: white;
-    font-size: 22px;
     font-weight: bolder;
     padding: 4px 10px;
-    margin: 3px 0;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
-.big-btn:hover {
+button:hover {
     background-color: rgb(78, 154, 189);
+}
+
+.big-btn {
+    font-size: 22px;
+    margin: 3px 0;
+}
+
+.lil-btn {
+    font-size: 17px;
+    padding: 2px 5px;
+    margin: 3px 0;
 }
 
 .btn-group {
@@ -62,21 +77,11 @@ button {
 
 .btn-group button {
     display: block;
-    background-color: rgb(33, 116, 155); 
-    border: 1px solid rgb(78, 154, 189);
-    border-radius: 5px;
-    color: white;
-    font-size: 15px;
-    font-weight: bolder;
+    border-radius: 8px;
+    font-size: 17px;
     text-align: left;
     width: 150px;
-    padding: 4px 10px;
-    margin: 3px 0;
-    cursor: pointer; 
-}
-
-.btn-group button:hover {
-    background-color: rgb(78, 154, 189);
+    margin: 5px 0;
 }
 
 #timer {
