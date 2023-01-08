@@ -224,7 +224,7 @@ function highscoresInit() {
     })
 }
 
-if (window.location.href === "https://re-gi.github.io/December-Quiz/assets/highscores.html") {
+if (window.location.pathname.includes("highscores") === true) {
     highscoresInit();
 } else {
     indexInit();
