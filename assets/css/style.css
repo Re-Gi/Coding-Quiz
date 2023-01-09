@@ -1,6 +1,11 @@
+:root {
+    --Light: forestgreen;
+    --Dark: rgb(23, 88, 23);
+}
+
 * body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 22px;
     text-align: center;
     padding: 20px;
 }
@@ -14,14 +19,18 @@ main {
 
 section {
     display: inline-block;
-    width: 45%;
+    width: 60%;
     text-align: left;
-    padding: 20px;
+    padding-left: 35px;
+}
+
+h2 {
+    font-size: 32px;
 }
 
 header a:link, header a:visited {
     text-decoration: none;
-    color: rgb(33, 116, 155);
+    color: var(--Light);
     font-weight: bold;
 }
 
@@ -31,14 +40,14 @@ header a:hover, header a:active {
 
 ol {
     display: inline-block;
-    color: rgb(78, 154, 189);
+    color: var(--Light);
     font-size: 24px;
     width: max-content;
-    padding: 5px;
+    padding: 0px;
 }
 
 li {
-    border: 2px solid rgb(33, 116, 155);
+    border: 2px solid var(--Dark);
     padding: 8px 40px;
     margin: 5px;
 }
@@ -48,27 +57,26 @@ form {
 }
 
 button {
-    background-color: rgb(33, 116, 155); 
-    border: 1px solid rgb(78, 154, 189);
+    background-color: var(--Dark); 
+    border: 1px solid var(--Light);
+    border-radius: 8px;
     color: white;
-    font-weight: bolder;
-    padding: 4px 10px;
+    padding: 7px 20px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: rgb(78, 154, 189);
+    background-color: var(--Light);
 }
 
 .big-btn {
-    font-size: 22px;
-    margin: 3px 17px;
+    font-size: 24px;
+    margin: 3px 15px;
 }
 
 .lil-btn {
-    font-size: 17px;
-    padding: 2px 5px;
-    margin: 3px 0;
+    font-size: 19px;
+    padding: 0 5px;
 }
 
 .btn-group {
@@ -77,17 +85,16 @@ button:hover {
 
 .btn-group button {
     display: block;
-    border-radius: 8px;
-    font-size: 17px;
+    font-size: 24px;
     text-align: left;
-    width: 150px;
-    margin: 5px 0;
+    width: 260px;
+    margin: 8px 0;
 }
 
 #timer {
     position: fixed;
     right: 20px;
-    font-size: 20px;
+    color: rgb(73, 73, 73);
 }
 
 #highscores {

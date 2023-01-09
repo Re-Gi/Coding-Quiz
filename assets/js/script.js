@@ -1,9 +1,9 @@
 var mainEl = document.querySelector("main");
-var mainTitleEl = document.querySelector("h1");
+var mainTitleEl = document.querySelector("#main-title");
 var startBtnEl = document.querySelector("#start-btn");
 var timeEl = document.querySelector("#timer");
 var divEl = document.querySelector(".box1");
-var titleEl = document.querySelector("h2");
+var sectionTitleEl = document.querySelector("#questions-title");
 var btnGroupEl = document.querySelector(".btn-group");
 var highscoresEl = document.querySelector("#highscores-list");
 var formEl = document.querySelector("form");
@@ -13,38 +13,38 @@ var inputEl = document.querySelector("#initials");
 var submitBtnEl = document.querySelector("#submit-btn");
 
 //Question objects
-var flowerQ = {
-    question: "Which is considered a December flower?",
-    choices: ["Narcissus", "Poppy", "Violet", "Larkspur"],
-    answer: "Narcissus"
+var dataQ = {
+    question: "Commonly used data-types DO Not Include:",
+    choices: ["booleans", "strings", "numbers", "alerts"],
+    answer: "alerts"
 }
 
-var zodiacQ = {
-    question: "Which is a December zodiac sign?",
-    choices: ["Capricorn", "Leo", "Cancer", "Gemini"],
-    answer: "Capricorn"
+var conditionQ = {
+    question: "The condition in an if / else statement is enclosed with _____.",
+    choices: ["quotes", "curly brackets", "parenthesis", "square brackets"],
+    answer: "parenthesis"
 }
 
-var romanQ = {
-    question: "December is the ____ month in the calendar of Romulus.",
-    choices: ["10th", "12th", "7th", "1st"],
-    answer: "10th"
+var arraysQ = {
+    question: "Arrays in JavaScript can be used to store _____.",
+    choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+    answer: "all of the above"
 }
 
-var daysQ = {
-    question: "How many days are in December?",
-    choices: ["31", "30", "29", "32"],
-    answer: "31"
+var stringsQ = {
+    question: "String values must be enclosed within _____ when being assigned to variables.",
+    choices: ["commas", "curly brackets", "quotes", "parenthesis"],
+    answer: "commas"
 }
 
-var birthstoneQ = {
-    question: "Which is considered a December birthstone?",
-    choices: ["Turquoise", "Sapphire", "Diamond", "Aquamarine"],
-    answer: "Turquoise"
+var debuggingQ = {
+    question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    choices: ["JavaScript", "terminal/bash", "for loops", "console.log"],
+    answer: "console.log"
 }
 
 //array of question objects
-var questions = [flowerQ, zodiacQ, romanQ, daysQ, birthstoneQ];
+var questions = [dataQ, conditionQ, arraysQ, stringsQ, debuggingQ];
 var answers = [];
 var clickCount = 0;
 
@@ -78,7 +78,7 @@ function indexInit() {
 
             //attaches questions to h2 element
             var randomIntQ = Math.floor(Math.random() * questions.length); 
-            titleEl.textContent = questions[randomIntQ].question;
+            sectionTitleEl.textContent = questions[randomIntQ].question;
             answers.unshift(questions[randomIntQ].answer);
 
             //makes buttons with answer choices
@@ -103,7 +103,7 @@ function indexInit() {
             secondsLeft-= 15;
         }
 
-        titleEl.textContent = "";
+        sectionTitleEl.textContent = "";
         btnGroupEl.innerHTML = "";
 
         buildQuestions();
@@ -136,7 +136,7 @@ function indexInit() {
         formEl.setAttribute("style", "display: block;");
 
         formTitleEl.textContent = "Your Score: " + newScore.userScore;
-        labelEl.textContent = "Enter initials:";
+        labelEl.textContent = "enter initials:";
         submitBtnEl.textContent = "submit";
         
 
@@ -147,7 +147,7 @@ function indexInit() {
                 alert("Please input your initials!");
                 return;
             } else {
-                newScore.userInitials = inputEl.value;
+                newScore.userInitials = inputEl.value.toUpperCase();
             }
         
             console.log(newScore);
@@ -209,7 +209,7 @@ function highscoresInit() {
             if(latestScores.scores[i] !== undefined){
             var listItemEl = document.createElement("li");
             listEl.appendChild(listItemEl);
-            listItemEl.textContent = latestScores.initials[i] + " / " + latestScores.scores[i] + "pts";
+            listItemEl.textContent = latestScores.initials[i] + " | " + latestScores.scores[i] + "pts";
             } else {
                 break;
             }

@@ -1,7 +1,7 @@
-# December-Quiz
-![Screenshot of deployed webpage.](assets/images/Screenshot%20(13).png)
+# Coding-Quiz
+![Screenshot of deployed webpage.](assets/images/Screenshot%20(18).png)
 
-Visit the deployed application [Here.](https://re-gi.github.io/December-Quiz/)
+Visit the deployed application [Here.](https://re-gi.github.io/Coding-Quiz/)
 
 ## Description
 This application generates a 5-question timed quiz and locally saves the 10 highest scores. This is a UTA Web Developement Bootcamp challenge for unit 4, made to strengthen my understanding of web APIs and the DOM.
@@ -22,18 +22,18 @@ If the user wishes to view the current highscores list, they can do so by clicki
 
 When each question appears, the user should read the question and available choices, then click on the choice they think is the correct answer. 
 
-![Screenshot of application with a question and 4 answer choices displayed.](assets/images/Screenshot%20(14).png)
+![Screenshot of application with a question and 4 answer choices displayed.](assets/images/Screenshot%20(19).png)
 
 When the game ends, the user should enter their initials into the input box and click the "submit" button to potentially save their score and initials to the highscores list(so long as it is among the 10 highest scores stored in their device). Clicking "submit" will immediately take the user to the "Top 10 Highscores" page.
 
-![Screenshot of application with a user's score displayed as well as an empty form with a submit button.](assets/images/Screenshot%20(15).png)
+![Screenshot of application with a user's score displayed as well as an empty form with a submit button.](assets/images/Screenshot%20(20).png)
 
 ### On the "Top 10 Highscores" page:
 If the user wishes to clear their highscores list they should click on the "Clear" button.
 
 If the user wishes to go back to the quiz's introductory page, they should click on the "Back" button.
 
-![Screenshot of application with a user's top 10 highscores list displayed](assets/images/Screenshot%20(16).png)
+![Screenshot of application with a user's top 10 highscores list displayed](assets/images/Screenshot%20(21).png)
 
 ## Liscense
 Refer to liscensing in the project repository.
