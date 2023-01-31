@@ -35,5 +35,5 @@ If the user wishes to go back to the quiz's introductory page, they should click
 
 ![Screenshot of application with a user's top 10 highscores list displayed](assets/images/Screenshot%20(21).png)
 
-## Liscense
+## License
 Refer to liscensing in the project repository.
