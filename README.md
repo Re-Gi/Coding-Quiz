@@ -1,7 +1,7 @@
 # Coding-Quiz
 ![Screenshot of deployed webpage.](assets/images/Screenshot%20(18).png)
 
-Visit the deployed application [Here.](https://re-gi.github.io/Coding-Quiz/)
+Visit the deployed application [Here.](https://re-gi.github.io/UTA_Coding-Quiz/)
 
 ## Description
 This application generates a 5-question timed quiz and locally saves the 10 highest scores. This is a UTA Web Developement Bootcamp challenge for unit 4, made to strengthen my understanding of web APIs and the DOM.
